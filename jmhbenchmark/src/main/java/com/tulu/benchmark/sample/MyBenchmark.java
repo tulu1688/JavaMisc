@@ -7,6 +7,8 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.Warmup;
 
+import java.util.HashMap;
+
 public class MyBenchmark {
 
     @Benchmark
@@ -14,14 +16,22 @@ public class MyBenchmark {
     @Fork(value = 1, warmups = 2)
     @Warmup(iterations = 2)
     @Measurement(iterations = 5)
-    public void testMethod() {
-        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
-        // Put your benchmark code here.
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void testSimpleCreateHashmap() {
+        HashMap<String,String> myHashMap = new HashMap<>();
+        String key = "key_" + System.currentTimeMillis();
+        String tuluKey = myHashMap.get(key);
+        if (tuluKey == null)
+            myHashMap.put(key,"value_" + key);
     }
 
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @Fork(value = 1, warmups = 2)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 5)
+    public void testCreateIfAbsentHashmapItem() {
+        HashMap<String,String> myHashMap = new HashMap<>();
+        String key = "key_" + System.currentTimeMillis();
+        myHashMap.computeIfAbsent(key, k -> "value_" + k);
+    }
 }
