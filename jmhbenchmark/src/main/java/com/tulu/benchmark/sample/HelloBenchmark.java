@@ -9,11 +9,11 @@ import org.openjdk.jmh.annotations.Warmup;
 
 import java.util.HashMap;
 
-public class MyBenchmark {
+public class HelloBenchmark {
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
-    @Fork(value = 1, warmups = 2)
+    @Fork(value = 1)
     @Warmup(iterations = 2)
     @Measurement(iterations = 5)
     public void testSimpleCreateHashmap() {
@@ -26,7 +26,7 @@ public class MyBenchmark {
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
-    @Fork(value = 1, warmups = 2)
+    @Fork(value = 1)
     @Warmup(iterations = 2)
     @Measurement(iterations = 5)
     public void testCreateIfAbsentHashmapItem() {

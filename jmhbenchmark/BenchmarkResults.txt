@@ -1,0 +1,3 @@
+Benchmark                                      Mode  Cnt       Score      Error  Units
+JsonSerializeBenchmark.gsonSerialize          thrpt  200   66808.617 ± 1619.787  ops/s
+JsonSerializeBenchmark.jacksonSerialize       thrpt  200  144259.225 ± 3901.057  ops/s
