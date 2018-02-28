@@ -7,10 +7,10 @@ mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=org.openjdk.jm
 java -jar target/benchmarks.jar
 
 # Run benchmark with config
-java -jar target/benchmarks.jar -f 2 -wi 3 -i 2
--f: fork
--wi: warmup iteration
--i: iteration
+java -jar target/benchmarks.jar -f 2 -wi 3 -i 2  
+-f: fork  
+-wi: warmup iteration  
+-i: iteration  
 
 # Annotation based config
 ```
@@ -22,6 +22,29 @@ java -jar target/benchmarks.jar -f 2 -wi 3 -i 2
 @State(Scope.Benchmark)
 public class InfinityDBJMHTest {
 …
+}
+```
+
+# Run with benchmark option
+```
+public static void main(String... args) throws Exception {
+  Options opts = new OptionsBuilder()
+      .include(".*")
+      .warmupIterations(10)
+      .measurementIterations(10)
+      .jvmArgs("-server")
+      .forks(1)
+      .outputFormat(OutputFormatType.TextReport)
+      .build();
+
+  Map<BenchmarkRecord,RunResult> records = new Runner(opts).run();
+  for (Map.Entry<BenchmarkRecord, RunResult> result : records.entrySet()) {
+    Result r = result.getValue().getPrimaryResult();
+    System.out.println("API replied benchmark score: "
+      + r.getScore() + " "
+      + r.getScoreUnit() + " over "
+      + r.getStatistics().getN() + " iterations");
+  }
 }
 ```
 
