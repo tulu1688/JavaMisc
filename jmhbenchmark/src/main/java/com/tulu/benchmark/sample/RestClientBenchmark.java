@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class RestClientBenchmark {
-    private static final String URL = "http://localhost:8094/report/v3.1/customers/summaries/sofs/cash";
+    private static final String URL = "http://sample.com/";
 
     /**
      * Run benchmark without warmup
