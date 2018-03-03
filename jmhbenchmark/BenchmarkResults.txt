@@ -1,3 +1,8 @@
 Benchmark                                      Mode  Cnt       Score      Error  Units
 JsonSerializeBenchmark.gsonSerialize          thrpt  200   66808.617 ± 1619.787  ops/s
 JsonSerializeBenchmark.jacksonSerialize       thrpt  200  144259.225 ± 3901.057  ops/s
+-> Jackson serialization is better than gson
+
+Benchmark                                                           Mode  Cnt  Score   Error  Units
+ResetServiceInHostAndContainerBenchmark.testDockerContainerRestApi  avgt    2  0.009           s/op
+ResetServiceInHostAndContainerBenchmark.testLocalHostRestApi        avgt    2  0.003           s/op
