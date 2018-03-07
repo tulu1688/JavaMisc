@@ -1,11 +1,10 @@
-package com.tulu.prometheus.HelloPrometheus;
+package com.tulu.boot.prometheus;
 
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.exporter.common.TextFormat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.tomcat.jni.Local;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -33,6 +32,7 @@ public class HelloPrometheusApplication {
 
 	@GetMapping(path = "/metrics")
 	public void metrics(Writer responseWriter) throws IOException{
+		log.info("Total request [{}]", counter.get());
 		TextFormat.write004(responseWriter, CollectorRegistry.defaultRegistry.metricFamilySamples());
 		responseWriter.close();
 	}
